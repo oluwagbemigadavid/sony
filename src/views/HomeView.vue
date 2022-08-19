@@ -47,7 +47,7 @@ export default {
     position: absolute;
     left: -35%;
     top: -40%;
-    transform: scale(1.2);
+    transform: scale(1);
   }
   .overlay {
     position: absolute;
