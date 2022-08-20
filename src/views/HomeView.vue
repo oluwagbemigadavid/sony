@@ -5,6 +5,16 @@
     <div class="overlay"></div>
     <div class="section-01">
       <img :src="images.hp" alt="" id="hp">
+      <img :src="images.optimizeIcon" alt="" id="optimizeIcon">
+    </div>
+    <div class="section-02">
+      <div class="section-02-content">
+        <h2>Sony WH-1000xm3</h2>
+        <div id="text">
+          <h4>2 Devices Connected</h4>
+          <img :src="images.battery" alt="" id="battery" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +23,8 @@
 import hpBg from '@/assets/HP-BG.png'
 import hp from '@/assets/HPBG.png'
 import bg from '@/assets/BG.png'
+import optimizeIcon from '@/assets/optimize-Icon.png'
+import battery from '@/assets/battery.png'
 
 export default {
   name: 'HomeView',
@@ -21,7 +33,9 @@ export default {
       images: {
         hpBg: hpBg,
         bg: bg,
-        hp: hp
+        hp: hp,
+        optimizeIcon: optimizeIcon,
+        battery: battery
       }
     }
   }
@@ -32,6 +46,7 @@ export default {
 .container {
   width: 100vw;
   height: 100vh;
+  color: #fff;
   position: relative;
   overflow: hidden;
   #backgroundImg  {
@@ -60,9 +75,38 @@ export default {
   }
   .section-01 {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
     #hp {
-      margin-top: 20%;
-      transform: scale(1.2);
+      width: 60%;
+    }
+    #optimizeIcon {
+      position: absolute;
+      //top: 35%;
+      right: 15%;
+      width: 60%;
+    }
+  }
+  .section-02 {
+    position: relative;
+    .section-02-content {
+      position: relative;
+      margin-top: 5%;
+      h2,h4 {
+        margin: 2%;
+      }
+      #text {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        h4 {
+          color: #969FA4;
+        }
+      }
     }
   }
 }
