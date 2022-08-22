@@ -113,6 +113,12 @@ export default {
           color: #969FA4;
         }
       }
+      .row-01 {
+        width: 94%;
+        margin: auto;
+        display: flex;
+        justify-content: left;
+      }
     }
   }
 }
