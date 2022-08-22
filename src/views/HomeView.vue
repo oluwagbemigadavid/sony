@@ -14,6 +14,9 @@
           <h4>2 Devices Connected</h4>
           <img :src="images.battery" alt="" id="battery" />
         </div>
+        <div class="row-01">
+          <SoundTypeComponent />
+        </div>
       </div>
     </div>
   </div>
@@ -25,20 +28,23 @@ import hp from '@/assets/HPBG.png'
 import bg from '@/assets/BG.png'
 import optimizeIcon from '@/assets/optimize-Icon.png'
 import battery from '@/assets/battery.png'
+import SoundTypeComponent from '@/components/SoundTypeComponent.vue'
+
 
 export default {
-  name: 'HomeView',
-  data () {
-    return {
-      images: {
-        hpBg: hpBg,
-        bg: bg,
-        hp: hp,
-        optimizeIcon: optimizeIcon,
-        battery: battery
-      }
-    }
-  }
+    name: "HomeView",
+    components: { SoundTypeComponent },
+    data() {
+        return {
+            images: {
+                hpBg: hpBg,
+                bg: bg,
+                hp: hp,
+                optimizeIcon: optimizeIcon,
+                battery: battery
+            }
+        };
+    },
 }
 </script>
 
