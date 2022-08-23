@@ -15,8 +15,10 @@
           <img :src="images.battery" alt="" id="battery" />
         </div>
         <div class="row-01">
-          <SoundTypeComponent />
+          <SoundTypeComponent id="sound-type-component" @expand="getState" @click="state()"/>
+          <PlayMusicComponet id="play-music-component"/>
         </div>
+        <p>{{elementState}} jijiji</p>
       </div>
     </div>
   </div>
@@ -29,11 +31,12 @@ import bg from '@/assets/BG.png'
 import optimizeIcon from '@/assets/optimize-Icon.png'
 import battery from '@/assets/battery.png'
 import SoundTypeComponent from '@/components/SoundTypeComponent.vue'
+import PlayMusicComponet from '@/components/PlayMusicComponet.vue'
 
 
 export default {
     name: "HomeView",
-    components: { SoundTypeComponent },
+    components: { SoundTypeComponent, PlayMusicComponet },
     data() {
         return {
             images: {
@@ -42,9 +45,24 @@ export default {
                 hp: hp,
                 optimizeIcon: optimizeIcon,
                 battery: battery
-            }
+            },
+            elementState: ''
         };
     },
+    created () {     
+    },
+    methods: {
+      getState (value) {
+        this.elementState = value
+      },
+      state() {
+        if(this.elementState) {
+          document.getElementById('play-music-component').style.display = 'none'
+        } else {
+          document.getElementById('play-music-component').style.display = 'block'
+        }
+      }
+    }
 }
 </script>
 
@@ -67,7 +85,7 @@ export default {
     height: 100%;
     position: absolute;
     left: -35%;
-    top: -40%;
+    top: -35%;
     transform: scale(1);
   }
   .overlay {
@@ -116,8 +134,12 @@ export default {
       .row-01 {
         width: 94%;
         margin: auto;
+        margin-top: 5%;
         display: flex;
         justify-content: left;
+        #play-music-component {
+          margin-left: 12%;
+        }
       }
     }
   }

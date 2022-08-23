@@ -1,6 +1,6 @@
 <template>
     <div class="sound-type-container" >
-        <div class="view ">
+        <div class="view">
             <div class="mainContent">
                     <div class="switch" @click="view()">       
                         <div class="toggle-button-cover">
@@ -101,7 +101,8 @@ export default {
                 tree: tree,
                 wall: wall
             },
-            slider: 0
+            slider: 0,
+            expanded: ''
         }
     },
     created() {
@@ -136,10 +137,15 @@ export default {
         },
         view () {
             document.querySelector('.view').classList.add('expanded')
+            this.expanded = true
+            this.$emit('expand', this.expanded)
+            console.log(this.expanded)
         },
         close () {
             document.querySelector('.view').classList.remove('expanded')
-            console.log('hehe')
+            this.expanded = false
+            this.$emit('expand', this.expanded)
+            console.log(this.expanded)
         }
     }
 }
@@ -150,7 +156,7 @@ export default {
     position: relative;
     width: 40%;
     height: 100vh;
-    z-index: 8;
+    z-index: 5;
     .view.expanded {
         width: 208%;
         height: 80%;
@@ -158,6 +164,8 @@ export default {
         margin-top: -230%;
         cursor: default;
         position: relative;
+        transition: all .1s ease;
+        z-index: 9;
         .mainContent {
             background-color: #1F2122;
             width: 120%;
@@ -165,7 +173,7 @@ export default {
             height: 70%;
             border-radius: 10px; 
             padding: 2% 0;  
-            position: relative;         
+            position: relative;     
                 .switch {        
                     position: absolute;
                     transform: scale(.5); 
@@ -562,9 +570,9 @@ export default {
             .switch{
                 display: block;
                 position: absolute;
-                    transform: scale(.5); 
-                    right: 28%;
-                    top: 14%;
+                    transform: scale(.45); 
+                    right: 26%;
+                    top: 13%;
                     .toggle-button-cover
                     {
                         position: relative;
