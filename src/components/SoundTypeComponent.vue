@@ -173,9 +173,12 @@ export default {
 @keyframes grow {
     0% {
         margin-top: 0%;
+        transform: scale(.2);
+        transform-origin: 50% 0%;
     }
     100% {
         margin-top: -230%;
+        transform: scale(1);
     }
 }
 @keyframes appear {
