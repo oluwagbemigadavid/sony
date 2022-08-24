@@ -1,72 +1,75 @@
 <template>
     <div class="sound-type-container" >
-        <div class="view">
+        <div class="view ">
             <div class="mainContent">
-                    <div class="switch" @click="view()">       
-                        <div class="toggle-button-cover">
-                            <div class="button-cover">
-                                <div class="button r" id="button-1">
-                                    <input type="checkbox" class="checkbox" checked>
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
+                <div class="mainContentContainer">
+                        <div class="switch" @click="view()">       
+                            <div class="toggle-button-cover">
+                                <div class="button-cover">
+                                    <div class="button r" id="button-1">
+                                        <input type="checkbox" class="checkbox" checked>
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    <div class="top">
+                        <h4>Adaptive Sound Control</h4>
+                        <div class="menu">
+                            <h3 class="stay" @click="staying()">Staying</h3>
+                            <h3 class="transport active" @click="transport()">Transport</h3>
+                            <h3 class="walk ">Walking</h3>
+                            <h3 class="run ">Running</h3>
+                            <h3 class="sleep ">Sleeping</h3>
+                        </div>
                     </div>
-                <div class="top">
-                    <h4>Adaptive Sound Control</h4>
-                    <div class="menu">
-                        <h3 class="stay" @click="staying()">Staying</h3>
-                        <h3 class="transport active" @click="transport()">Transport</h3>
-                        <h3 class="walk ">Walking</h3>
-                        <h3 class="run ">Running</h3>
-                        <h3 class="sleep ">Sleeping</h3>
+                            <img :src="images.bus" alt="" id="smolBus" @click="view()"/>
+                    <div class="imageContainer  ">     
+                        <div class="leftImages">
+                            <img :src="images.wall" alt="" id="wall"/>  
+                            <img :src="images.window" alt="" id="window1"/> 
+                            <img :src="images.window" alt="" id="window2"/>
+                            <img :src="images.tv" alt="" id="tv"/> 
+                            <img :src="images.person" alt="" id="person"/> 
+                        </div>
+                        <div class="rightImages ">   
+                            <img :src="images.tree" alt="" id="fisrtTree"/>
+                            <img :src="images.tree" alt="" id="smallTree" />
+                            <img :src="images.star" alt="" id="star3" />
+                            <img :src="images.cloud" alt="" id="cloud"/>
+                            <img :src="images.star" alt="" id="star2" />
+                            <img :src="images.star" alt="" id="star1" />
+                            <img :src="images.tree" alt="" id="lastTree"/>
+                            <img :src="images.bus" alt="" id="bus"/>
+                        </div>                        
                     </div>
-                </div>
-                        <img :src="images.bus" alt="" id="smolBus" @click="view()"/>
-                <div class="imageContainer  ">     
-                    <div class="leftImages">
-                        <img :src="images.wall" alt="" id="wall"/>  
-                        <img :src="images.window" alt="" id="window1"/> 
-                        <img :src="images.window" alt="" id="window2"/>
-                        <img :src="images.tv" alt="" id="tv"/> 
-                        <img :src="images.person" alt="" id="person"/> 
+                    <div class="controlText">
+                        <h5>Ambient Sound</h5>
+                        <h5 id="highlight">{{slider}}</h5>
                     </div>
-                    <div class="rightImages ">   
-                        <img :src="images.tree" alt="" id="fisrtTree"/>
-                        <img :src="images.tree" alt="" id="smallTree" />
-                        <img :src="images.star" alt="" id="star3" />
-                        <img :src="images.cloud" alt="" id="cloud"/>
-                        <img :src="images.star" alt="" id="star2" />
-                        <img :src="images.star" alt="" id="star1" />
-                        <img :src="images.tree" alt="" id="lastTree"/>
-                        <img :src="images.bus" alt="" id="bus"/>
-                    </div>                        
-                </div>
-                <div class="controlText">
-                    <h5>Ambient Sound</h5>
-                    <h5 id="highlight">{{slider}}</h5>
-                </div>
-                <div class="slider">
-                    <div class="range-input">
-                        <input type="range" min="0" max="20" value="0" step="1" @input="Slider()">
+                    <div class="slider">
+                        <div class="range-input">
+                            <input type="range" min="0" max="20" value="0" step="1" @input="Slider()">
+                        </div>
                     </div>
-                </div>
-                <div class="focus">
-                    <p id="focus">Focus on Voice</p>      
-                    <div class="switch">       
-                        <div class="toggle-button-cover">
-                            <div class="button-cover">
-                                <div class="button r" id="button-1">
-                                    <input type="checkbox" class="checkbox">
-                                    <div class="knobs"></div>
-                                    <div class="layer"></div>
+                    <div class="focus">
+                        <p id="focus">Focus on Voice</p>      
+                        <div class="switch">       
+                            <div class="toggle-button-cover">
+                                <div class="button-cover">
+                                    <div class="button r" id="button-1">
+                                        <input type="checkbox" class="checkbox">
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>          
+                        </div>          
+                    </div>
+                    <p id="title"  @click="view()">Transport</p>
                 </div>
-                <p id="title"  @click="view()">Transport</p>
+                    
             </div>
             <div class="buttons">                
                 <p id="done" @click="close()">Done</p>
@@ -152,6 +155,40 @@ export default {
 
 </script>
 <style lang="scss" scoped>
+@keyframes goleft {
+    0% {
+        left: -30%;
+    } 100% {
+        left: 36%;
+    }
+}
+@keyframes goright {
+    0% {
+        left: -30%;
+    } 100% {
+        left: 0%;
+        right: 11%
+    }
+}
+@keyframes grow {
+    0% {
+        margin-top: 0%;
+    }
+    100% {
+        margin-top: -230%;
+    }
+}
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+    90% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 .sound-type-container { 
     position: relative;
     width: 40%;
@@ -164,7 +201,7 @@ export default {
         margin-top: -230%;
         cursor: default;
         position: relative;
-        transition: all .1s ease;
+        animation: grow 450ms ease;
         z-index: 9;
         .mainContent {
             background-color: #1F2122;
@@ -173,7 +210,13 @@ export default {
             height: 70%;
             border-radius: 10px; 
             padding: 2% 0;  
-            position: relative;     
+            position: relative; 
+            .mainContentContainer {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                animation: appear 450ms ease;    
+            }
                 .switch {        
                     position: absolute;
                     transform: scale(.5); 
@@ -365,11 +408,13 @@ export default {
                     }
                     #tv {
                         right: 11%;
+                        animation: goleft 5s;
                     }
                     #person {
                         width: 110px;
                         bottom: 0;
                         left: 36%;
+                        animation: goleft 5s;
                     }
                 }
                 .rightImages {
@@ -508,7 +553,7 @@ export default {
                 width: 80%;
                 font-weight: lighter;
                 background-color: #303537;
-                margin: 10% auto;
+                margin: 5% auto;
                 text-align: left;
                 border-radius: 10px;
                 .switch {

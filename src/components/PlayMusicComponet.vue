@@ -4,12 +4,14 @@
             <div class="main-content">                
                 <div class="content">
                     <div class="displayImg">
-                        <img :src="items[activeIdPreview].img" alt="" id="img">
+                        <div class="image">
+                            <img :src="items[activeIdPreview].img" alt="" id="img">
+                        </div>
+                        <div class="overlay"> </div>
                         <div v-for="(item) in items" :key="item.id"  class="topImg">
                             <div v-if="item.id == activeId">
                                 <div class="img">
-                                    <img :src="item.img" alt="" id="displayImage">
-                                    <div class="overlay"> </div>
+                                    <img :src="item.img" alt="" id="displayImage" class="displayImage">
                                 </div>
                                 <div class="row-one" @click="view()">
                                     <p>Now Playing</p>
@@ -25,10 +27,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row-four">                                   
-                        <div class="slider">
-                            <div class="range-input">
-                                <input type="range" min="0" max="20" value="0" step="1" @input="slider()">
+                    <div class="row-four">  
+                        <div class="slider2">
+                            <div class="range-input2">
+                                <input type="range" min="0" max="255" value="0" step="1" @input="slider()">
                             </div>
                             <div class="texts">
                                 <p>{{start}}</p>
@@ -38,9 +40,9 @@
                     </div>
                     <div class="row-five" @click="view()">
                         <div class="icons">
-                            <i class="fa-solid fa-backward-step" id="prev"></i>
+                            <i class="fa-solid fa-backward-step" id="prev" @click="next('left')"></i>
                             <i class="fa-solid fa-play"></i>
-                            <i class="fa-solid fa-forward-step" id="next"></i>
+                            <i class="fa-solid fa-forward-step" id="next" @click="next('right')"></i>
                         </div>
                     </div>
                 </div>
@@ -108,13 +110,13 @@ export default  {
             start: 0,
             stop: 0,
             activeId: 2,
-            activeIdPreview: 2,
+            activeIdPreview: 0,
             expanded: ''
         }
     },
     methods: {        
         slider () {
-            let rangeInput = document.querySelector(".range-input input");
+            let rangeInput = document.querySelector(".range-input2 input");
 
             this.start = parseFloat(rangeInput.value);
             console.log(this.start)
@@ -130,12 +132,56 @@ export default  {
             this.expanded = false
             this.$emit('expand', this.expanded)
             console.log(this.expanded)
+        },
+        next (direction) {
+            if (direction == 'right') {
+                if(this.activeId == 4 && this.activeIdPreview == 2) {
+                    setTimeout(() => {
+                        this.activeId = 4 
+                        this.activeIdPreview = 2
+                    }, 20)
+                } else {
+                    ++this.activeId
+                    ++this.activeIdPreview
+                    console.log(this.activeId)
+                }
+            } else if (direction == 'left') {                
+                if(this.activeId == 2 && this.activeIdPreview == 0) {
+                    setTimeout(() => {
+                        this.activeId = 2 
+                        this.activeIdPreview = 0
+                    }, 20)
+                } else {
+                    --this.activeId
+                    --this.activeIdPreview
+                    console.log(this.activeId)
+                }
+            }
+            
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@keyframes topLeft {
+    0% {
+        transform: translateX(0%) translateY(0%);
+    }
+    100% {
+        transform: translateX(-100%) translateY(-100%);
+    }
+    
+}
+@keyframes bottomLeft {
+    0% {
+        transform: translateX(100%) translateY(100%);
+    }
+    100% {
+        transform: translateX(0%) translateY(0%);
+    }
+    
+}
     .play-music-container {        
         position: relative;
         width: 40%;
@@ -160,7 +206,7 @@ export default  {
                 justify-content: left;
                 .content {
                     .displayImg {
-                        #img {
+                        .image {
                             display: none;
                         }
                         .topImg {
@@ -247,38 +293,48 @@ export default  {
                 display: flex;
                 flex-direction: column;
                 justify-content: left;
+                overflow: hidden;
                 .content {
                     .displayImg {
-                        #img {
+                        overflow: hidden;
+                        .image {
                             display: block;
+                        }
+                        #img {
                             position: absolute;
                             width: 100%;
                             height: 45vh;
                             top: 0;
                             left: 0;
                             border-radius: 10px;
+                            animation: topLeft 450ms ease-out;
                         }
+                                .overlay {
+                                    position: absolute;
+                                    width: 102%;
+                                    height: 50vh;
+                                    left: 0%;
+                                    top: 0;
+                                    z-index: 1;
+                                    background: linear-gradient(to top, rgba(#1F2122, 1) 10%, rgba(#1F2122, 0));
+                                }
                         .topImg {                            
                             width: 100%;
                             .img {
                                 display: block;
                                 position: absolute;
                                 top: 0;
-                                left: 0;
+                                left: 0%;
+                                overflow: hidden;
                                 #displayImage {                               
                                     width: 100%;
                                     height: 45vh;
                                     border-radius: 10px;
-                                }
-                                .overlay {
-                                    position: absolute;
-                                    width: 100%;
-                                    height: 45vh;
-                                    top: 0;
-                                    background: linear-gradient(to top, rgba(#1F2122, 1) 10%, rgba(#1F2122, 0));
+                                    animation: bottomLeft 450ms ease-in;
                                 }
                             }
                             .row-one {
+                                z-index: 2;
                                 position: relative;
                                 margin-top: 70%;
                                 color: #969FA4;
@@ -288,6 +344,7 @@ export default  {
                                 }
                             }
                             .row-two {
+                                z-index: 2;
                                 position: relative;
                                 #name{ 
                                     color: #FFB375;
@@ -306,6 +363,7 @@ export default  {
                                 }
                             }
                             .row-three {
+                                z-index: 2;
                                 position: relative;
                                 display: block;
                                 color: #FFB375;
@@ -317,14 +375,15 @@ export default  {
                     }
                     
                     .row-four {
+                        z-index: 2;
                         position: relative;
                         display: block;
-                        .slider {
+                        .slider2 {
                             display: flex;
                             position: relative;
                             width: 100%;
                             margin: 10% 0 8%;
-                            .range-input {
+                            .range-input2 {
                                 position:absolute;
                                 width: 100%;
                                 top:5%;
@@ -332,7 +391,7 @@ export default  {
                                 display:flex;
                                 flex-direction: column;
                             }
-                            .range-input input {
+                            .range-input2 input {
                                 -webkit-appearance:none;
                                 width: 100%;
                                 height:5px;
@@ -341,7 +400,7 @@ export default  {
                                 border:none;
                                 outline:none;
                             }
-                            .range-input::before {
+                            .range-input2::before {
                                 content: '';
                                 -webkit-appearance:none;
                                 position: absolute;
@@ -352,7 +411,7 @@ export default  {
                                 border:none;
                                 outline:none;
                             }
-                            .range-input input::-webkit-slider-thumb {
+                            .range-input2 input::-webkit-slider-thumb {
                                 -webkit-appearance:none;
                                 width:20px;
                                 height:20px;
@@ -361,10 +420,10 @@ export default  {
                                 border-radius:50%;
                                 cursor: pointer;
                             }
-                            .range-input input::-webkit-slider-thumb:hover {
+                            .range-input2 input::-webkit-slider-thumb:hover {
                                 background:#FFB375;
                             }
-                            .range-input .value {
+                            .range-input2 .value {
                                 color:#FFB375;
                                 text-align:center;
                                 font-weight:600;
@@ -373,7 +432,7 @@ export default  {
                                 overflow:hidden;
                                 margin-left:10px;
                             }
-                            .range-input .value div {
+                            .range-input2 .value div {
                                 transition:all 300ms ease-in-out;
                             }
 
@@ -394,6 +453,7 @@ export default  {
                         }
                     }
                     .row-five {
+                        z-index: 2;
                         position: relative;
                         margin: auto;
                         width: 70%;
@@ -441,6 +501,7 @@ export default  {
                         color: #000000;
                         margin-right: 2%;
                         font-size: 30px;
+                        cursor: pointer;
                     }
                 }
                 #cancel {
