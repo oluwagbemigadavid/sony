@@ -1,6 +1,6 @@
 <template>
     <div class="play-music-container">
-        <div class="view2 expanded2">
+        <div class="view2">
             <div class="main-content">                
                 <div class="content">
                     <div class="displayImg">

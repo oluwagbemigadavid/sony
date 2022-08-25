@@ -199,7 +199,7 @@ export default {
     0% {
         right: -100%
     } 100% {
-        right: 25%
+        right: 26%
     }
 }
 @keyframes slideleftLT {
