@@ -1,6 +1,6 @@
 <template>
     <div class="play-music-container">
-        <div class="view2">
+        <div class="view2 expanded2">
             <div class="main-content">                
                 <div class="content">
                     <div class="displayImg">
@@ -30,11 +30,11 @@
                     <div class="row-four">  
                         <div class="slider2">
                             <div class="range-input2">
-                                <input type="range" min="0" max="255" value="0" step="1" @input="slider()">
+                                <input type="range" min="0" max="225" value="0" step="1" @input="slider()">
                             </div>
                             <div class="texts">
                                 <p>{{start}}</p>
-                                <p id="stop">{{stop}}</p>
+                                <p id="stop">- {{stop}}</p>
                             </div>
                         </div>
                     </div>
@@ -108,23 +108,27 @@ export default  {
                 },
             ],
             start: 0,
-            stop: 0,
+            stop: 225,
             activeId: 2,
             activeIdPreview: 0,
             expanded: ''
         }
     },
+    created() {
+    },
     methods: {        
         slider () {
             let rangeInput = document.querySelector(".range-input2 input");
-
             this.start = parseFloat(rangeInput.value);
-            console.log(this.start)
+            let stop = parseFloat(rangeInput.max);
+            this.stop = stop - this.start
+            
         },
         view () {
             document.querySelector('.view2').classList.add('expanded2')
             this.expanded = true
-            this.$emit('expand', this.expanded)
+            this.$emit('expand', this.expanded) 
+            setTimeout(()=> this.activeIdPreview = 0, 1000)
             console.log(this.expanded)
         },
         close () {
@@ -134,8 +138,17 @@ export default  {
             console.log(this.expanded)
         },
         next (direction) {
+           /*  if(this.activeId == 2 || this.activeId == 4) {
+                document.querySelector(".range-input2 input").value ="95"
+                this.start = 95
+                this.stop = 130
+            } else {
+                document.querySelector(".range-input2 input").value ="0"
+                this.start = 0
+                this.stop = 225
+            } */
             if (direction == 'right') {
-                if(this.activeId == 4 && this.activeIdPreview == 2) {
+                if(this.activeId >=4 ) {
                     setTimeout(() => {
                         this.activeId = 4 
                         this.activeIdPreview = 2
@@ -146,12 +159,12 @@ export default  {
                     console.log(this.activeId)
                 }
             } else if (direction == 'left') {                
-                if(this.activeId == 2 && this.activeIdPreview == 0) {
+                if(this.activeId == 2) {
                     setTimeout(() => {
                         this.activeId = 2 
                         this.activeIdPreview = 0
                     }, 20)
-                } else {
+                } else if (this.activeId >2<4) {
                     --this.activeId
                     --this.activeIdPreview
                     console.log(this.activeId)
@@ -164,15 +177,6 @@ export default  {
 </script>
 
 <style lang="scss" scoped>
-@keyframes topLeft {
-    0% {
-        transform: translateX(0%) translateY(0%);
-    }
-    100% {
-        transform: translateX(-100%) translateY(-100%);
-    }
-    
-}
 @keyframes bottomLeft {
     0% {
         transform: translateX(100%) translateY(100%);
@@ -181,6 +185,15 @@ export default  {
         transform: translateX(0%) translateY(0%);
     }
     
+}
+@keyframes floatup {
+    0% {
+        top: 110%;
+        opacity: 0;
+    } 100% {
+        top: 0%;
+        opacity: 1;
+    }
 }
     .play-music-container {        
         position: relative;
@@ -307,7 +320,6 @@ export default  {
                             top: 0;
                             left: 0;
                             border-radius: 10px;
-                            animation: topLeft 450ms ease-out;
                         }
                                 .overlay {
                                     position: absolute;
@@ -330,7 +342,7 @@ export default  {
                                     width: 100vw;
                                     height: 45vh;
                                     border-radius: 10px;
-                                    animation: bottomLeft 450ms ease-in;
+                                    animation: bottomLeft 100ms ease-in;
                                 }
                             }
                             .row-one {
@@ -338,6 +350,7 @@ export default  {
                                 position: relative;
                                 margin-top: 70%;
                                 color: #969FA4;
+                                animation: floatup 700ms ease-in;
                                 p {
                                     text-align: center;
                                     margin: 2%;
@@ -346,6 +359,7 @@ export default  {
                             .row-two {
                                 z-index: 2;
                                 position: relative;
+                                animation: floatup 700ms ease-in;
                                 #name{ 
                                     color: #FFB375;
                                     margin: 0;
@@ -370,6 +384,7 @@ export default  {
                                 margin: 0;
                                 font-weight: lighter;
                                 text-align: center;
+                                animation: floatup 700ms ease-in;
                             }
                         }
                     }
@@ -382,7 +397,8 @@ export default  {
                             display: flex;
                             position: relative;
                             width: 100%;
-                            margin: 10% 0 8%;
+                            margin: 0% 0 8%;
+                        animation: floatup 450ms ease-in;
                             .range-input2 {
                                 position:absolute;
                                 width: 100%;
@@ -443,6 +459,7 @@ export default  {
                             width: 120%;
                             margin: 15% 0 0;
                             color: #969FA4;
+                        animation: floatup 450ms ease-in;
                             p {
                                 margin: 0;
                             }
@@ -457,6 +474,7 @@ export default  {
                         position: relative;
                         margin: auto;
                         width: 70%;
+                        margin-top: 15%;
                         .icons {
                             display: flex;
                             justify-content: center;
@@ -481,6 +499,7 @@ export default  {
                 flex-direction: row;
                 position: relative;
                 width: 120%;
+                animation: floatup 500ms ease-in-out;
                 p {
                     color: #000;
                     background-color: #303537;

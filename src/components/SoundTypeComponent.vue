@@ -1,6 +1,6 @@
 <template>
     <div class="sound-type-container" >
-        <div class="view ">
+        <div class="view">
             <div class="mainContent">
                 <div class="mainContentContainer">
                         <div class="switch" @click="view()">       
@@ -26,6 +26,7 @@
                     </div>
                             <img :src="images.bus" alt="" id="smolBus" @click="view()"/>
                     <div class="imageContainer  ">     
+                        <div class="ICoverlay"></div>
                         <div class="leftImages">
                             <img :src="images.wall" alt="" id="wall"/>  
                             <img :src="images.window" alt="" id="window1"/> 
@@ -116,6 +117,7 @@ export default {
     methods: {
         staying () {
             document.querySelector('.imageContainer').classList.add('staying')
+            document.querySelector('.imageContainer').classList.remove('transportation')
             document.querySelector('.stay').classList.add('active')
             document.querySelector('.transport').classList.remove('active')
             document.querySelector('.menu').style.transform = `translateX(23%)`
@@ -123,6 +125,7 @@ export default {
         },
         transport () {
             document.querySelector('.imageContainer').classList.remove('staying')
+            document.querySelector('.imageContainer').classList.add('transportation')
             document.querySelector('.stay').classList.remove('active')
             document.querySelector('.transport').classList.add('active')
             document.querySelector('.menu').style.transform = `translateX(0%)`
@@ -157,19 +160,56 @@ export default {
 <style lang="scss" scoped>
 @keyframes goleft {
     0% {
-        left: -30%;
+        left: -300%;
     } 100% {
-        left: 36%;
+        left: 36%
     }
 }
-@keyframes goright {
+@keyframes golefttv {
     0% {
-        left: -30%;
+        right: 300%;
     } 100% {
-        left: 0%;
         right: 11%
     }
 }
+@keyframes cloud {
+    0% {
+        top: -100%;
+    } 100% {
+        top: 5%;
+    }
+}
+@keyframes treeUp {
+    0% {
+        bottom: -50%;
+    } 100% {
+        bottom: 0%;
+    }
+}
+@keyframes floatup {
+    0% {
+        top: 110%;
+        opacity: 0;
+    } 100% {
+        top: 0%;
+        opacity: 1;
+    }
+}
+@keyframes slideleft {
+    0% {
+        right: -100%
+    } 100% {
+        right: 25%
+    }
+}
+@keyframes slideleftLT {
+    0% {
+        right: -100%
+    } 100% {
+        right: -15.3%
+    }
+}
+
 @keyframes grow {
     0% {
         margin-top: 0%;
@@ -360,6 +400,7 @@ export default {
                     margin-left: 30%;
                     flex-direction: row;
                     position: relative;
+                    animation: floatup 700ms;
 
                     h3 {
                         margin: 0 3%;
@@ -379,6 +420,15 @@ export default {
                 height: 40%;
                 margin-top: 5%;
                 overflow: hidden;
+                .ICoverlay {
+                    position: absolute;
+                    width: 200vw;
+                    bottom: 0;
+                    left: -50%;
+                    height: 100%;
+                    background: linear-gradient(to top, rgba(#1F2122, .5) 0%, rgba(#1F2122, 0));
+                    z-index: 11;
+                }
                 img {
                     position: absolute;
                     width: 100px;
@@ -411,13 +461,11 @@ export default {
                     }
                     #tv {
                         right: 11%;
-                        animation: goleft 5s;
                     }
                     #person {
                         width: 110px;
                         bottom: 0;
                         left: 36%;
-                        animation: goleft 5s;
                     }
                 }
                 .rightImages {
@@ -442,6 +490,7 @@ export default {
                         width: 50px;
                         left: 50%;
                         top: 5%;
+                        animation: cloud 700ms;
                     }
                     #star3 {
                         width: 10px;
@@ -460,6 +509,7 @@ export default {
                     #lastTree {
                         bottom: 0;
                         right: -15.3%;
+                        animation: treeUp 700ms;
                     }
                     #bus {
                         width: 180px;
@@ -477,14 +527,34 @@ export default {
                 .leftImages {
                     left: 0;
                     transition: all .5s;
+
+                    #tv {
+                        animation: golefttv 700ms;
+                    }
+
+                    #person {
+                        animation: goleft 700ms;
+                    }
                 }
             }
+            .imageContainer.transportation {
+                .rightImages {
+                    #lastTree {
+                        animation: slideleftLT 700ms;
+                    }
+                    #bus {
+                        animation: slideleft 850ms;
+                    }
+                }
+            }
+            
             .controlText {
                 display: flex;
                 position: relative;
                 width: 80%;
                 margin: 0 auto;
                 font-size: 18px;
+                animation: floatup 700ms;
                 h5 {
                     font-weight: lighter;
                 }
@@ -498,6 +568,7 @@ export default {
                 display: flex;
                 position: relative;
                 width: 100%;
+                animation: floatup 700ms;
                 .range-input {
                     position:absolute;
                     width: 100%;
@@ -559,6 +630,7 @@ export default {
                 margin: 5% auto;
                 text-align: left;
                 border-radius: 10px;
+                animation: floatup 700ms;
                 .switch {
                     display: block;                    
                     top: 50%;
@@ -579,6 +651,7 @@ export default {
             flex-direction: row;
             position: relative;
             width: 120%;
+            animation: floatup 700ms;
             p {
                 color: #000;
                 background-color: #303537;
