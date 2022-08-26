@@ -104,7 +104,6 @@ export default {
       optimize () {
         document.querySelector('.section-01').classList.toggle('optimize')
         document.querySelector('.section-02').classList.toggle('opt')
-        setTimeout(()=>  document.querySelector('.section-02').classList.toggle('optz'), 450)
       },
       activeEq (value, id) {
         document.querySelector('.menuContents').style.margin = ` 0 0 0 ${value}%` 
@@ -174,6 +173,7 @@ export default {
   height: 100vh;
   color: #fff;
   position: relative;
+  overflow: hidden;
     .ImgContainer {
       width: 100vw;
       height: 100%;
@@ -257,9 +257,6 @@ export default {
     animation: disappear 1s ease-out;
     opacity: 0;
     transition: opacity 1s;
-  }
-  .section-02.optz {
-    display: none;
   }
   .section-02 {
     position: relative;
