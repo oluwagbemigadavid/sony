@@ -83,18 +83,22 @@ export default {
         if(this.elementState) {
           document.getElementById('play-music-component').style.display = 'none'
           document.querySelector('.underlay').classList.add('active')
+          document.querySelector('.row-02').classList.add('index')
         } else {
           document.getElementById('play-music-component').style.display = 'block'
           document.querySelector('.underlay').classList.remove('active')
+          document.querySelector('.row-02').classList.remove('index')
         }
       },
       state2() {
         if(this.elementState2) {
           document.getElementById('sound-type-component').style.display = 'none'
           document.querySelector('.underlay').classList.add('active')
+          document.querySelector('.row-02').classList.add('index')
         } else {
           document.getElementById('sound-type-component').style.display = 'block'
           document.querySelector('.underlay').classList.remove('active')
+          document.querySelector('.row-02').classList.remove('index')
         }
       },
       activeEq (value, id) {
@@ -247,6 +251,9 @@ export default {
           margin-left: 12%;
         }
       }
+      .row-02.index {
+        z-index: 6;
+      }
       .row-02 {
         width: 94%;
         margin: auto;
@@ -256,13 +263,18 @@ export default {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         overflow: hidden;
-        z-index: 6;
+        z-index: 8;
         .row-02-Container {
           text-align: left;
           color: #969FA4;
           padding: 2%;
           p {
             margin: 5% 5% ;
+          }
+          ::-webkit-scrollbar{
+            height: 0px;
+            width: 0px;
+            background: gray;
           }
           .slidingMenu {
             position: relative;

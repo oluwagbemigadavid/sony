@@ -190,7 +190,10 @@ export default  {
     0% {
         top: 110%;
         opacity: 0;
-    } 100% {
+    } 
+    80% {
+        opacity: 0;
+    }100% {
         top: 0%;
         opacity: 1;
     }
