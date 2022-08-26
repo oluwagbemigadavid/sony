@@ -7,7 +7,7 @@
     </div>
     <div class="section-01">
       <img :src="images.hp" alt="" id="hp">
-      <img :src="images.optimizeIcon" alt="" id="optimizeIcon">
+      <img :src="images.optimizeIcon" alt="" id="optimizeIcon" @click="optimize()">
     </div>
     <div class="underlay"></div>
     <div class="section-02">
@@ -101,6 +101,11 @@ export default {
           document.querySelector('.row-02').classList.remove('index')
         }
       },
+      optimize () {
+        document.querySelector('.section-01').classList.toggle('optimize')
+        document.querySelector('.section-02').classList.toggle('opt')
+        setTimeout(()=>  document.querySelector('.section-02').classList.toggle('optz'), 450)
+      },
       activeEq (value, id) {
         document.querySelector('.menuContents').style.margin = ` 0 0 0 ${value}%` 
         //var buttons = document.getElementsByClassName('eq')
@@ -153,6 +158,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@keyframes disappear {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .2;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .container {
   width: 100vw;
   height: 100vh;
@@ -195,16 +211,32 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 0%;
+    height: 40%;
+    transition: height 1s;
     #hp {
       width: 50%;
       margin-top: 10%;
+      position: absolute;
+      top: 0;
     }
     #optimizeIcon {
       position: absolute;
-      //top: 35%;
       right: 15%;
       width: 60%;
+      margin-top: 20%;
+      top: 0%;
+      z-index: 2;
+      opacity: 1;
+      transition: all 1s;
+      cursor: pointer;
+    }
+  }
+  .section-01.optimize {
+    height: 100vh;
+    transition: height 1s;
+    #optimizeIcon {
+      opacity: 0;
+      transition: all 1s;
     }
   }
   .underlay {
@@ -221,11 +253,21 @@ export default {
   .underlay.active {
     display: block;
   }
+  .section-02.opt {
+    animation: disappear 1s ease-out;
+    opacity: 0;
+    transition: opacity 1s;
+  }
+  .section-02.optz {
+    display: none;
+  }
   .section-02 {
     position: relative;
+    opacity: 1;
+    transition: opacity 1s;
     .section-02-content {
       position: relative;
-      margin-top: 5%;
+      margin-top: 0%;
       h2,h4 {
         margin: 2%;
       }
