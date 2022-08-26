@@ -1,6 +1,6 @@
 <template>
     <div class="sound-type-container" >
-        <div class="view">
+        <div class="view ">
             <div class="mainContent">
                 <div class="mainContentContainer">
                         <div class="switch" @click="view()">       
@@ -160,14 +160,20 @@ export default {
 <style lang="scss" scoped>
 @keyframes goleft {
     0% {
-        left: -300%;
-    } 100% {
+        left: -100%;
+    } 
+    50% {
+        left: 0%
+    }100% {
         left: 36%
     }
 }
 @keyframes golefttv {
     0% {
-        right: 300%;
+        right: 100%;
+    }
+    50% {
+        right: 50%
     } 100% {
         right: 11%
     }
@@ -190,7 +196,10 @@ export default {
     0% {
         top: 110%;
         opacity: 0;
-    } 100% {
+    } 
+    80% {
+        opacity: 0;
+    }100% {
         top: 0%;
         opacity: 1;
     }
@@ -235,16 +244,16 @@ export default {
 .sound-type-container { 
     position: relative;
     width: 40%;
-    height: 100vh;
     z-index: 5;
     .view.expanded {
         width: 208%;
-        height: 80%;
+        height: 80vh;
         margin: auto;
         margin-top: -230%;
         cursor: default;
         position: relative;
-        animation: grow 450ms ease;
+        //animation: grow 450ms ease;
+        transition: all 450ms ease-out ;
         z-index: 9;
         .mainContent {
             background-color: #1F2122;
@@ -651,7 +660,7 @@ export default {
             flex-direction: row;
             position: relative;
             width: 120%;
-            animation: floatup 700ms;
+            animation: floatup 450ms;
             p {
                 color: #000;
                 background-color: #303537;

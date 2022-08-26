@@ -127,26 +127,26 @@ export default  {
         view () {
             document.querySelector('.view2').classList.add('expanded2')
             this.expanded = true
-            this.$emit('expand', this.expanded) 
+            this.$emit('expand2', this.expanded) 
             setTimeout(()=> this.activeIdPreview = 0, 1000)
             console.log(this.expanded)
         },
         close () {
             document.querySelector('.view2').classList.remove('expanded2')
             this.expanded = false
-            this.$emit('expand', this.expanded)
+            this.$emit('expand2', this.expanded)
             console.log(this.expanded)
         },
         next (direction) {
-           /*  if(this.activeId == 2 || this.activeId == 4) {
+            if(this.activeId == 2 || this.activeId == 4) {
                 document.querySelector(".range-input2 input").value ="95"
                 this.start = 95
                 this.stop = 130
-            } else {
+            } else if (this.activeId == 1 || this.activeId == 3){
                 document.querySelector(".range-input2 input").value ="0"
                 this.start = 0
                 this.stop = 225
-            } */
+            } 
             if (direction == 'right') {
                 if(this.activeId >=4 ) {
                     setTimeout(() => {
@@ -193,6 +193,18 @@ export default  {
     } 100% {
         top: 0%;
         opacity: 1;
+    }
+}
+
+@keyframes grow {
+    0% {
+        margin-top: 0%;
+        transform: scale(.2);
+        transform-origin: 50% 0%;
+    }
+    100% {
+        margin-top: -230%;
+        transform: scale(1);
     }
 }
     .play-music-container {        
@@ -287,13 +299,14 @@ export default  {
         }
         .view2.expanded2 {      
             width: 208%;
-            height: 80%;
+            height: 80vh;
             margin: auto;
             margin-top: -230%;
-            margin-left: -130%;
+            margin-left: -30%;
             cursor: default;
             position: relative;
-            transition: all .1s ease;
+            //animation: grow 450ms ease;
+            transition: all 450ms ease-out ;
             z-index: 9;
             .main-content {            
                 padding: 10%;
@@ -342,7 +355,6 @@ export default  {
                                     width: 100vw;
                                     height: 45vh;
                                     border-radius: 10px;
-                                    animation: bottomLeft 100ms ease-in;
                                 }
                             }
                             .row-one {
@@ -483,6 +495,7 @@ export default  {
                                 width: 50%;
                                 margin: 0;
                                 font-size: 45px;
+                                cursor: pointer;
                             }
                             #prev {
                                 text-align: left;
