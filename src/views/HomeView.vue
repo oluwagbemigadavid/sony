@@ -8,6 +8,33 @@
     <div class="section-01">
       <img :src="images.hp" alt="" id="hp">
       <img :src="images.optimizeIcon" alt="" id="optimizeIcon" @click="optimize()">
+      <div class="hp">        
+        <img :src="images.hprc" alt="" id="hprc">
+        <div class="waves"></div>
+      </div>
+      <div class="section-01-content">
+        <h2>Noise Cancelling Optimizer</h2>
+        <p>Wear headphones as you always would. If the ewearing condition changes, redo the process.</p>
+        <div class="options">
+          <div class="left">
+            <img :src="images.ear" alt="">
+            <div class="texts">
+              <p id="highlight">On-Ear Personalization</p>
+              <p>Not Set</p>
+            </div>
+          </div>
+          <div class="right">
+            <img :src="images.autoOpt" alt="" id="autoOpt">
+            <div class="texts">
+              <p id="highlight">Atmoshperic Optimization</p>
+              <p>Set to 10 atm</p>
+            </div>
+          </div>
+        </div>
+        <div class="optButton">
+          <p>Begin Optimization</p>
+        </div>
+      </div>
     </div>
     <div class="underlay"></div>
     <div class="section-02">
@@ -45,7 +72,10 @@
 <script>
 import hpBg from '@/assets/HP-BG.png'
 import hp from '@/assets/HPBG.png'
+import hprc from '@/assets/HP-Right Cup.png'
 import bg from '@/assets/BG.png'
+import ear from '@/assets/ear.png'
+import autoOpt from '@/assets/AutoOpt.png'
 import optimizeIcon from '@/assets/optimize-Icon.png'
 import battery from '@/assets/battery.png'
 import eq from '@/assets/Eq.png'
@@ -63,6 +93,9 @@ export default {
                 bg: bg,
                 hp: hp,
                 eq: eq,
+                ear: ear,
+                autoOpt: autoOpt,
+                hprc:hprc,
                 optimizeIcon: optimizeIcon,
                 battery: battery
             },
@@ -104,6 +137,7 @@ export default {
       optimize () {
         document.querySelector('.section-01').classList.toggle('optimize')
         document.querySelector('.section-02').classList.toggle('opt')
+        document.querySelector('.ImgContainer').classList.toggle('optim')
       },
       activeEq (value, id) {
         document.querySelector('.menuContents').style.margin = ` 0 0 0 ${value}%` 
@@ -168,6 +202,41 @@ export default {
     opacity: 0;
   }
 }
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2);
+  }
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  35% {
+    opacity: 0;
+    transform: scale(1);
+    margin-top: -30%;
+  }
+  100% {
+    opacity: 1;
+    margin-top: -30%;
+    transform: scale(1);
+  }
+}
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .container {
   width: 100vw;
   height: 100vh;
@@ -194,6 +263,9 @@ export default {
         left: -35%;
         top: -35%;
         transform: scale(1);
+        //display: none;
+        opacity: 1;
+        transition: opacity 450ms ease-out;
       }
       .overlay {
         position: absolute;
@@ -205,6 +277,13 @@ export default {
         z-index: 1;
       }
     }
+  .ImgContainer.optim {
+    #HPBig {
+        opacity: 0;
+        display: none;
+        transition: opacity 450ms ease-out;      
+    }
+  }
   .section-01 {
     position: relative;
     display: flex;
@@ -213,11 +292,21 @@ export default {
     align-items: center;
     height: 40%;
     transition: height 1s;
+    .hp {
+      display: none;
+    }
+    .section-01-content {
+      display: none;
+    }
     #hp {
       width: 50%;
       margin-top: 10%;
+      transform: scale(1);
+      opacity: 1;
+      transition: all 1s ease-in;
       position: absolute;
       top: 0;
+      z-index: 2;
     }
     #optimizeIcon {
       position: absolute;
@@ -234,9 +323,118 @@ export default {
   .section-01.optimize {
     height: 100vh;
     transition: height 1s;
+    #hp {
+      margin-top: -35%;
+      margin-left: 45%;
+      transform: scale(4);
+      opacity: 0;
+      transition: all 1s ease-in;
+    }
     #optimizeIcon {
       opacity: 0;
       transition: all 1s;
+    }
+    .hp {
+      display: flex;
+      position: absolute;
+      top: 0;
+      justify-content: center;
+      #hprc {
+        position: relative;
+        margin-top: -30%;
+        animation: appear 1.5s ease-out;
+        z-index: 1;
+      }
+      .waves {
+        display: none;
+        position: absolute;
+        background: #fff;
+        width: 35%;
+        height: 35%;
+        left: 45%;
+        border-radius: 180px;
+        opacity: .5;
+        z-index: 2;
+        top: 45%;
+        transform: skewX(10deg);
+      }
+    }
+    .section-01-content {
+      display: block;
+      margin-top: 100%;
+      animation: show 1s ease-in;
+      p {
+        color: #969FA4;
+        width: 75%;
+        font-size: 15px;
+        margin: 0 auto;
+        font-weight: lighter;
+      }
+      .options {
+        display: flex;
+        .left {
+          margin: 5% 0% 5% 5%;
+          width: 50%;
+          padding: 5%;
+          border-radius: 10px;
+          text-align: left;
+          display: flex;
+          background-color: #1F2122;
+          cursor: pointer;
+          img {
+            width: 18%;
+            height: 40%;
+          }
+          .texts {
+            p {
+              font-size: 14px;
+            }
+            #highlight {
+              color: #fff;
+              margin-bottom: 10%;
+            }
+          }
+        }
+        .right {
+          margin: 5% 5% 5% 5%;
+          width: 50%;
+          padding: 5%;
+          border-radius: 10px;
+          text-align: left;
+          display: flex;
+          background-color: #1F2122;
+          cursor: pointer;
+          img {
+            width: 18%;
+            height: 30%;
+          }
+          .texts {
+            p {
+              font-size: 12px;
+              color: #FFB375;
+            }
+            #highlight {
+              color: #fff;
+              font-size: 14px;
+              margin-bottom: 10%;
+            }
+          }
+        }
+      }
+      .optButton {
+        width: 80%;
+        background-color: #FFB375;
+        padding: 5%;
+        border-radius: 10px;
+        position: absolute;
+        bottom: 5%;
+        left: 5%; 
+        cursor: pointer;
+        p {
+          color: #000;
+          font-weight: bold;
+        }
+      }
     }
   }
   .underlay {
