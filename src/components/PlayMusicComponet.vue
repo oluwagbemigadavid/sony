@@ -223,7 +223,7 @@ export default  {
             cursor: pointer;
             .main-content {            
                 padding: 10%;
-            background-color: rgba(#1F2122, .7);
+                background-color: rgba(#1F2122, .7);
                 width: 100%;
                 margin: auto;
                 height: 100%;
@@ -232,6 +232,7 @@ export default  {
                 display: flex;
                 flex-direction: column;
                 justify-content: left;
+                transition: height 450ms ease;
                 .content {
                     .displayImg {
                         .image {
@@ -309,7 +310,7 @@ export default  {
             cursor: default;
             position: relative;
             //animation: grow 450ms ease;
-            transition: all 450ms ease-out ;
+            transition: height 450ms ease;
             z-index: 9;
             .main-content {            
                 padding: 10%;
@@ -322,7 +323,7 @@ export default  {
                 display: flex;
                 flex-direction: column;
                 justify-content: left;
-                overflow: hidden;
+                overflow: hidden;             
                 .content {
                     .displayImg {
                         overflow: hidden;

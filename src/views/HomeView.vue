@@ -386,6 +386,16 @@ export default {
     opacity: 1;
   }
 }
+@keyframes expand {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(6);
+  }
+}
 .container {
   width: 100vw;
   height: 100vh;
@@ -726,6 +736,8 @@ export default {
         transform: scale(1.5);
         transition: all 1s;
         z-index: 1;
+        animation: expand 550ms ease-out;
+        animation-delay: 1750ms;
       }
       .waves {
         display: flex;
@@ -735,7 +747,7 @@ export default {
         left: 50%;
         border-radius: 50%;
         animation: wave 2s;
-        animation-delay: 500ms;
+        animation-delay: 300ms;
         opacity: .5;
         z-index: 2;
         top: 52%;

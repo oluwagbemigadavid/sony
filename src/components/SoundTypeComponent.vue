@@ -249,15 +249,14 @@ export default {
         width: 208%;
         height: 80vh;
         margin: auto;
-        margin-top: -230%;
         cursor: default;
         position: relative;
-        //animation: grow 450ms ease;
-        transition: all 450ms ease-out ;
+        transition: height 450ms ease-out ;
+        margin-top: -230%;
         z-index: 9;
         .mainContent {
-            background-color: #1F2122;
             width: 120%;
+            background-color: #1F2122;
             margin: auto;
             height: 70%;
             border-radius: 10px; 
@@ -538,11 +537,11 @@ export default {
                     transition: all .5s;
 
                     #tv {
-                        animation: golefttv 700ms;
+                        animation: golefttv 450ms;
                     }
 
                     #person {
-                        animation: goleft 700ms;
+                        animation: goleft 450ms;
                     }
                 }
             }
@@ -682,7 +681,7 @@ export default {
     }
     .view {
         width: 100%;
-        height: 18%;
+        height: 18vh;
         margin: auto;
         font-weight: lighter;
         cursor: pointer;
@@ -697,6 +696,7 @@ export default {
             display: flex;
             flex-direction: column;
             justify-content: left;
+            transition: height 450ms ease;
             .switch{
                 display: block;
                 position: absolute;
