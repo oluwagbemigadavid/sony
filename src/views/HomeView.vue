@@ -5,9 +5,13 @@
       <img :src="images.hpBg" alt="" id="HPBig">
       <div class="overlay"></div>
     </div>
-    <div class="section-01">
-      <img :src="images.hp" alt="" id="hp">
+    <div class="section-01 ">
+      <img :src="images.hp" alt="" id="hp" class="hpNom">
       <img :src="images.optimizeIcon" alt="" id="optimizeIcon" @click="optimize()">
+      <div class="dispImage">
+        <img :src="images.clouds" alt="" id="clouds">
+        <img :src="images.wind" alt="" id="windows">
+      </div>
       <div class="hp">        
         <img :src="images.hprc" alt="" id="hprc">
         <div class="waves"></div>
@@ -106,6 +110,8 @@ import autoOpt from '@/assets/AutoOpt.png'
 import optimizeIcon from '@/assets/optimize-Icon.png'
 import battery from '@/assets/battery.png'
 import eq from '@/assets/Eq.png'
+import wind from '@/assets/planewindow.png'
+import clouds from '@/assets/Clouds.png'
 import SoundTypeComponent from '@/components/SoundTypeComponent.vue'
 import PlayMusicComponet from '@/components/PlayMusicComponet.vue'
 
@@ -121,6 +127,8 @@ export default {
                 hp: hp,
                 eq: eq,
                 ear: ear,
+                wind: wind,
+                clouds: clouds,
                 autoOpt: autoOpt,
                 hprc:hprc,
                 optimizeIcon: optimizeIcon,
@@ -200,23 +208,29 @@ export default {
         }, 500)
         setTimeout(()=> {
           document.querySelector('.opt-01').classList.remove('show') 
-          document.querySelector('.opt-02').classList.add('show')   
+          document.querySelector('.opt-02').classList.add('show')
+          document.getElementById('hprc').style.display = 'none'
+          document.querySelector('.dispImage').style.display = 'block'
         }, 2000)
         setTimeout(()=> {
+          document.querySelector('.dispImage').style.display = 'none'
           document.querySelector('.opt-02').classList.remove('show') 
           document.querySelector('.opt-03').classList.add('show')   
+          document.getElementById('hp').classList.add('set')
         }, 4000)
         setTimeout(()=> {
+          document.getElementById('hprc').style.display = 'block'
+          document.getElementById('hp').style.transition = 'none'
           document.querySelector('.opt-03').classList.remove('show')   
           document.querySelector('.section-01').classList.remove('optimize')
           document.querySelector('.section-02').classList.remove('opt')
           document.querySelector('.ImgContainer').classList.remove('optim')
           document.querySelector('.section-01-content').classList.remove('begOpt')
           document.querySelector('.section-01').classList.remove('optimizing')
-          document.getElementById('optimizeIcon').style.zIndex = '4'
         }, 5500)
         setTimeout(()=> {        
           document.getElementById('status').style.fontStyle = 'normal'
+          document.getElementById('optimizeIcon').style.zIndex = '4'
           document.getElementById('status').innerHTML = 'Begin Optimization'   
           document.querySelector('.progBar').style.width = '0%'
         }, 5600)
@@ -299,6 +313,24 @@ export default {
   100% {
     opacity: 0;
     margin-top: 50%;
+  }
+}
+@keyframes return {
+  0% {
+    margin-top: 100%;
+    transform: scale(2)
+  }
+  100% {
+    margin-top: 10%;
+    transform: scale(1)
+  }
+}
+@keyframes clouds {
+  0% {
+    left: 32%;
+  }
+  100% {
+    left: -15%;
   }
 }
 @keyframes wave {
@@ -407,6 +439,9 @@ export default {
     height: 40%;
     transition: height 1s;
     .hp {
+      display: none;
+    }
+    .dispImage {
       display: none;
     }
     .section-01-content {
@@ -593,7 +628,7 @@ export default {
         -webkit-tap-highlight-color: transparent;
       }
     .section-01-content {
-      display: block;
+      display: none;
       animation: show 1s ease-in;
       -webkit-tap-highlight-color: transparent;
       p {
@@ -663,6 +698,23 @@ export default {
     }
   }
   .section-01.optimizing {
+    #hp {
+      opacity: 0;
+      z-index: 9;
+    }
+    #hp.set {
+        width: 50%;
+        margin-top: 10%;
+        transform: scale(1);
+        opacity: 1;
+        transition: none;
+        position: absolute;
+        top: 0;
+        left: -20%;
+        display: block;
+        z-index: 9;
+        animation: return 1s ease;
+    }
     .hp {
       #hprc {
         position: relative;
@@ -684,6 +736,22 @@ export default {
         z-index: 2;
         top: 52%;
         transform: skewX(10deg);
+      }
+    }
+    .dispImage {
+      animation: show 250ms ease-in;
+      #clouds {
+        position: absolute;
+        top: 25%;
+        left: 32%;
+        width: 100%;
+        animation: clouds 2s;
+
+      }
+      #windows {
+        position: absolute;
+        top: 0%;
+        left: -50%;
       }
     }
   }
