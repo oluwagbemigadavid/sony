@@ -23,14 +23,14 @@
       <div class="opt-02">
         <div class="opt-cont">
           <h4>2/3</h4>
-          <h3>Measuring Your Current Altitude</h3>
+          <h2>Measuring Your Current Altitude</h2>
           <p>Calculatin the overall atmospheric pressure around you. Redo the prodess if you jump on a plane.</p>
         </div>
       </div>
       <div class="opt-03">
         <div class="opt-cont">
           <h4>3/3</h4>
-          <h3>Analyzing Noise Cancelling Data</h3>
+          <h2>Analyzing Noise Cancelling Data</h2>
           <p>Almost there! Just puttingi everything together as Noise cancelling is optimally tailored to your taste.</p>
         </div>
       </div>
@@ -166,6 +166,7 @@ export default {
         document.querySelector('.section-02').classList.add('opt')
         document.querySelector('.ImgContainer').classList.add('optim')
         document.querySelector('.section-01-content').style.display = 'block'
+        setTimeout(()=> document.getElementById('optimizeIcon').style.zIndex = '0', 200)
       },
       begOpt () {
         document.querySelector('.section-01-content').classList.add('begOpt')
@@ -212,8 +213,9 @@ export default {
           document.querySelector('.ImgContainer').classList.remove('optim')
           document.querySelector('.section-01-content').classList.remove('begOpt')
           document.querySelector('.section-01').classList.remove('optimizing')
+          document.getElementById('optimizeIcon').style.zIndex = '4'
         }, 5500)
-        setTimeout(()=> {          
+        setTimeout(()=> {        
           document.getElementById('status').style.fontStyle = 'normal'
           document.getElementById('status').innerHTML = 'Begin Optimization'   
           document.querySelector('.progBar').style.width = '0%'
@@ -354,6 +356,7 @@ export default {
   color: #fff;
   position: relative;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
     .ImgContainer {
       width: 100vw;
       height: 100%;
@@ -429,6 +432,7 @@ export default {
       opacity: 1;
       transition: all 1s;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
     .optButton {
       display: none;
@@ -438,6 +442,9 @@ export default {
       position: absolute;
       bottom: 12%;
       display: none;
+      .opt-cont{
+        -webkit-tap-highlight-color: transparent;
+      }
     }
     .opt-01.show {
       display: flex;
@@ -543,6 +550,7 @@ export default {
         z-index: 2;
         top: 45%;
         transform: skewX(10deg);
+        -webkit-tap-highlight-color: transparent;
       }
     }
       .optButton {
@@ -558,6 +566,7 @@ export default {
         animation: show 1s ease-in;
         cursor: pointer;
         text-align: center;
+        -webkit-tap-highlight-color: transparent;
         p {
           margin: 0;
           width: 100%;
@@ -573,6 +582,7 @@ export default {
           height: 100%;
           position: absolute;
           background-color: rgba(#ffffff, .2);
+          -webkit-tap-highlight-color: transparent;
         }
       }
       .sec-one-cont {
@@ -580,16 +590,19 @@ export default {
         position: relative;
         margin-top: 100%;
         height: 30%;
+        -webkit-tap-highlight-color: transparent;
       }
     .section-01-content {
       display: block;
       animation: show 1s ease-in;
+      -webkit-tap-highlight-color: transparent;
       p {
         color: #969FA4;
         width: 75%;
         font-size: 15px;
         margin: 0 auto;
         font-weight: lighter;
+        -webkit-tap-highlight-color: transparent;
       }
       .options {
         display: flex;
@@ -601,6 +614,7 @@ export default {
           text-align: left;
           display: flex;
           background-color: #1F2122;
+          -webkit-tap-highlight-color: transparent;
           cursor: pointer;
           img {
             width: 18%;
@@ -625,6 +639,7 @@ export default {
           display: flex;
           background-color: #1F2122;
           cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
           img {
             width: 18%;
             height: 30%;
@@ -699,6 +714,7 @@ export default {
     .section-02-content {
       position: relative;
       margin-top: 0%;
+      -webkit-tap-highlight-color: transparent;
       h2,h4 {
         margin: 2%;
       }
@@ -720,8 +736,10 @@ export default {
         justify-content: left;
         position: absolute;
         z-index: 7;
+        -webkit-tap-highlight-color: transparent;
         #play-music-component {
           margin-left: 12%;
+          -webkit-tap-highlight-color: transparent;
         }
       }
       .row-02.index {
@@ -737,10 +755,12 @@ export default {
         border-top-right-radius: 10px;
         overflow: hidden;
         z-index: 8;
+        -webkit-tap-highlight-color: transparent;
         .row-02-Container {
           text-align: left;
           color: #969FA4;
           padding: 2%;
+          -webkit-tap-highlight-color: transparent;
           p {
             margin: 5% 5% ;
           }
@@ -752,15 +772,18 @@ export default {
           .slidingMenu {
             position: relative;
             overflow-x: scroll;
+            -webkit-tap-highlight-color: transparent;
             .menuContents {
               display: flex;
               width: 165%;
               margin: 0 0 0 -45%;
+              -webkit-tap-highlight-color: transparent;
               p {
                 font-size: 20px;
                 font-weight: lighter;
                 margin: 0 2%;
                 cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
               }
               .active {
                 color: #FFB375;
@@ -771,6 +794,7 @@ export default {
             margin-top: 5%;
             width: 105%;
             margin-left: -2%;
+            -webkit-tap-highlight-color: transparent;
           }
         }
       }
