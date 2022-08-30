@@ -12,27 +12,54 @@
         <img :src="images.hprc" alt="" id="hprc">
         <div class="waves"></div>
       </div>
-      <div class="section-01-content">
-        <h2>Noise Cancelling Optimizer</h2>
-        <p>Wear headphones as you always would. If the ewearing condition changes, redo the process.</p>
-        <div class="options">
-          <div class="left">
-            <img :src="images.ear" alt="">
-            <div class="texts">
-              <p id="highlight">On-Ear Personalization</p>
-              <p>Not Set</p>
-            </div>
-          </div>
-          <div class="right">
-            <img :src="images.autoOpt" alt="" id="autoOpt">
-            <div class="texts">
-              <p id="highlight">Atmoshperic Optimization</p>
-              <p>Set to 10 atm</p>
-            </div>
-          </div>
+      
+      <div class="opt-01">
+        <div class="opt-cont">
+          <h4>1/3</h4>
+          <h2>Measuring Your Wearing Condition</h2>
+          <p>Ear as always. Redo the process if you change the way you wear due to hairstyle change, etc.</p>
         </div>
-        <div class="optButton">
-          <p>Begin Optimization</p>
+      </div>
+      <div class="opt-02">
+        <div class="opt-cont">
+          <h4>2/3</h4>
+          <h3>Measuring Your Current Altitude</h3>
+          <p>Calculatin the overall atmospheric pressure around you. Redo the prodess if you jump on a plane.</p>
+        </div>
+      </div>
+      <div class="opt-03">
+        <div class="opt-cont">
+          <h4>3/3</h4>
+          <h3>Analyzing Noise Cancelling Data</h3>
+          <p>Almost there! Just puttingi everything together as Noise cancelling is optimally tailored to your taste.</p>
+        </div>
+      </div>
+
+
+      <div class="optButton" @click="begOpt()" >
+        <p id="status">Begin Optimization</p>
+        <div class="progBar"></div>
+      </div>
+      <div class="sec-one-cont">
+        <div class="section-01-content">
+          <h2 class="txt">Noise Cancelling Optimizer</h2>
+          <p class="txt">Wear headphones as you always would. If the ewearing condition changes, redo the process.</p>
+          <div class="options">
+            <div class="left">
+              <img :src="images.ear" alt="">
+              <div class="texts">
+                <p id="highlight">On-Ear Personalization</p>
+                <p>Not Set</p>
+              </div>
+            </div>
+            <div class="right">
+              <img :src="images.autoOpt" alt="" id="autoOpt">
+              <div class="texts">
+                <p id="highlight">Atmoshperic Optimization</p>
+                <p>Set to 10 atm</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -135,9 +162,62 @@ export default {
         }
       },
       optimize () {
-        document.querySelector('.section-01').classList.toggle('optimize')
-        document.querySelector('.section-02').classList.toggle('opt')
-        document.querySelector('.ImgContainer').classList.toggle('optim')
+        document.querySelector('.section-01').classList.add('optimize')
+        document.querySelector('.section-02').classList.add('opt')
+        document.querySelector('.ImgContainer').classList.add('optim')
+        document.querySelector('.section-01-content').style.display = 'block'
+      },
+      begOpt () {
+        document.querySelector('.section-01-content').classList.add('begOpt')
+        setTimeout(()=> document.querySelector('.section-01-content').style.display = 'none', 600)
+        document.querySelector('.section-01').classList.add('optimizing')
+
+        var speed = 0
+        var prog = document.querySelector('.progBar')
+        var timer = null
+        timer = setInterval (() => {
+          if(speed >= 100) {
+            clearInterval(timer)
+          } else {
+            prog.style.width = speed + '%'
+            speed++
+            document.getElementById('status').style.fontStyle = 'italic'
+            if ( speed < 50){
+              document.getElementById('status').innerHTML = 'Optimizing...'
+            }
+            if ( speed == 50){
+              document.getElementById('status').innerHTML = 'Almost there...'
+            }
+            if ( speed == 80){
+              document.getElementById('status').innerHTML = 'Finishing...'
+            }
+          }
+        }, 54)
+
+        setTimeout(()=> {
+          document.querySelector('.opt-01').classList.add('show')   
+        }, 500)
+        setTimeout(()=> {
+          document.querySelector('.opt-01').classList.remove('show') 
+          document.querySelector('.opt-02').classList.add('show')   
+        }, 2000)
+        setTimeout(()=> {
+          document.querySelector('.opt-02').classList.remove('show') 
+          document.querySelector('.opt-03').classList.add('show')   
+        }, 4000)
+        setTimeout(()=> {
+          document.querySelector('.opt-03').classList.remove('show')   
+          document.querySelector('.section-01').classList.remove('optimize')
+          document.querySelector('.section-02').classList.remove('opt')
+          document.querySelector('.ImgContainer').classList.remove('optim')
+          document.querySelector('.section-01-content').classList.remove('begOpt')
+          document.querySelector('.section-01').classList.remove('optimizing')
+        }, 5500)
+        setTimeout(()=> {          
+          document.getElementById('status').style.fontStyle = 'normal'
+          document.getElementById('status').innerHTML = 'Begin Optimization'   
+          document.querySelector('.progBar').style.width = '0%'
+        }, 5600)
       },
       activeEq (value, id) {
         document.querySelector('.menuContents').style.margin = ` 0 0 0 ${value}%` 
@@ -208,6 +288,37 @@ export default {
   }
   100% {
     transform: scale(2);
+  }
+}
+@keyframes floatDown {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    margin-top: 50%;
+  }
+}
+@keyframes wave {
+  0% {
+    transform: scale(1) skewX(10deg);
+    //transform-origin: 42% 50%;
+    opacity: .3;
+    background: rgb(0, 0, 0);
+  }
+  50% {
+    transform: scale(2) skewX(10deg);    
+    width: 80%;
+    left: 25%;
+    opacity: .3;
+    background: rgb(130, 130, 130);
+  }
+  100% {
+    transform: scale(5) skewX(10deg);
+    width: 100%;
+    left: 0%;
+    opacity: 0;
+    background: rgb(194, 194, 194);
   }
 }
 @keyframes appear {
@@ -319,7 +430,81 @@ export default {
       transition: all 1s;
       cursor: pointer;
     }
+    .optButton {
+      display: none;
+    }
   }
+    .opt-01, .opt-02, .opt-03 {
+      position: absolute;
+      bottom: 12%;
+      display: none;
+    }
+    .opt-01.show {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .opt-cont {
+        animation: show 500ms ease-in;
+        h4 {
+          color: #FFB375;
+        }
+        h2 {
+          width: 60%;
+          margin: 2% auto;
+          color: #fff;
+        }
+        p {
+          width: 80%;
+          margin: auto;
+          color: #969FA4;
+        }
+
+      }
+    }
+    .opt-02.show {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .opt-cont {
+        animation: show 500ms ease-in;
+        h4 {
+          color: #FFB375;
+        }
+        h2 {
+          width: 60%;
+          margin: 2% auto;
+          color: #fff;
+        }
+        p {
+          width: 80%;
+          margin: auto;
+          color: #969FA4;
+        }
+
+      }
+    }
+    .opt-03.show {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .opt-cont {
+        animation: show 500ms ease-in;
+        h4 {
+          color: #FFB375;
+        }
+        h2 {
+          width: 60%;
+          margin: 2% auto;
+          color: #fff;
+        }
+        p {
+          width: 80%;
+          margin: auto;
+          color: #969FA4;
+        }
+
+      }
+    }
   .section-01.optimize {
     height: 100vh;
     transition: height 1s;
@@ -342,13 +527,14 @@ export default {
       #hprc {
         position: relative;
         margin-top: -30%;
+        transform: scale(1);
+        transition: all 1s;
         animation: appear 1.5s ease-out;
         z-index: 1;
       }
       .waves {
         display: none;
         position: absolute;
-        background: #fff;
         width: 35%;
         height: 35%;
         left: 45%;
@@ -359,9 +545,44 @@ export default {
         transform: skewX(10deg);
       }
     }
+      .optButton {
+        display: flex;
+        position: absolute;
+        width: 80%;
+        padding: 5%;
+        border-radius: 10px;
+        background-color: #FFB375;
+        bottom: 2%;
+        left: 5%; 
+        margin-top: 100%;
+        animation: show 1s ease-in;
+        cursor: pointer;
+        text-align: center;
+        p {
+          margin: 0;
+          width: 100%;
+          color: #000;
+          font-weight: bold;
+          text-align: center;
+        }
+        .progBar{
+          width: 0%;
+          bottom: 0%;
+          left: 0%; 
+          border-radius: 10px;
+          height: 100%;
+          position: absolute;
+          background-color: rgba(#ffffff, .2);
+        }
+      }
+      .sec-one-cont {
+        overflow: hidden;
+        position: relative;
+        margin-top: 100%;
+        height: 30%;
+      }
     .section-01-content {
       display: block;
-      margin-top: 100%;
       animation: show 1s ease-in;
       p {
         color: #969FA4;
@@ -421,22 +642,37 @@ export default {
           }
         }
       }
-      .optButton {
-        width: 80%;
-        background-color: #FFB375;
-        padding: 5%;
-        border-radius: 10px;
+    }
+    .section-01-content.begOpt {
+      animation: floatDown 600ms ease-out ;
+    }
+  }
+  .section-01.optimizing {
+    .hp {
+      #hprc {
+        position: relative;
+        margin-top: -18%;
+        transform: scale(1.5);
+        transition: all 1s;
+        z-index: 1;
+      }
+      .waves {
+        display: flex;
         position: absolute;
-        bottom: 5%;
-        left: 5%; 
-        cursor: pointer;
-        p {
-          color: #000;
-          font-weight: bold;
-        }
+        width: 35%;
+        height: 45%;
+        left: 50%;
+        border-radius: 50%;
+        animation: wave 2s;
+        animation-delay: 500ms;
+        opacity: .5;
+        z-index: 2;
+        top: 52%;
+        transform: skewX(10deg);
       }
     }
   }
+
   .underlay {
     width: 100vw;
     height: 100vh;
