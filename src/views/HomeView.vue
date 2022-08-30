@@ -234,6 +234,10 @@ export default {
           document.getElementById('status').innerHTML = 'Begin Optimization'   
           document.querySelector('.progBar').style.width = '0%'
         }, 5600)
+        setTimeout(()=> {   
+          document.getElementById('hp').classList.remove('set') 
+          document.getElementById('hp').style.transition = `all 1s`    
+        }, 6500)
       },
       activeEq (value, id) {
         document.querySelector('.menuContents').style.margin = ` 0 0 0 ${value}%` 
