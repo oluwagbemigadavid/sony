@@ -180,6 +180,7 @@ export default {
         document.querySelector('.section-01-content').classList.add('begOpt')
         setTimeout(()=> document.querySelector('.section-01-content').style.display = 'none', 600)
         document.querySelector('.section-01').classList.add('optimizing')
+        document.getElementById('optimizeIcon').style.opacity = '0'
 
         var speed = 0
         var prog = document.querySelector('.progBar')
@@ -209,7 +210,9 @@ export default {
         setTimeout(()=> {
           document.querySelector('.opt-01').classList.remove('show') 
           document.querySelector('.opt-02').classList.add('show')
+          setTimeout(() => {           
           document.getElementById('hprc').style.display = 'none'
+          }, 200);
           document.querySelector('.dispImage').style.display = 'block'
         }, 2000)
         setTimeout(()=> {
@@ -230,7 +233,6 @@ export default {
         }, 5500)
         setTimeout(()=> {        
           document.getElementById('status').style.fontStyle = 'normal'
-          document.getElementById('optimizeIcon').style.zIndex = '4'
           document.getElementById('status').innerHTML = 'Begin Optimization'   
           document.querySelector('.progBar').style.width = '0%'
         }, 5600)
@@ -238,6 +240,12 @@ export default {
           document.getElementById('hp').classList.remove('set') 
           document.getElementById('hp').style.transition = `all 1s`    
         }, 6500)
+        setTimeout(() => {          
+          document.getElementById('optimizeIcon').style.zIndex = '4'
+          setTimeout(() => {            
+            document.getElementById('optimizeIcon').style.opacity = '1'
+          }, 100);
+        }, 8000);
       },
       activeEq (value, id) {
         document.querySelector('.menuContents').style.margin = ` 0 0 0 ${value}%` 
@@ -389,7 +397,6 @@ export default {
 @keyframes expand {
   0% {
     opacity: 1;
-    transform: scale(1);
   }
   100% {
     opacity: 0;
@@ -736,7 +743,7 @@ export default {
         transform: scale(1.5);
         transition: all 1s;
         z-index: 1;
-        animation: expand 550ms ease-out;
+        animation: expand 550ms ease-in;
         animation-delay: 1750ms;
       }
       .waves {
@@ -755,13 +762,12 @@ export default {
       }
     }
     .dispImage {
-      animation: show 250ms ease-in;
       #clouds {
         position: absolute;
         top: 25%;
         left: 32%;
         width: 100%;
-        animation: clouds 2s;
+        animation: clouds 2s ease;
 
       }
       #windows {

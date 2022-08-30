@@ -310,7 +310,7 @@ export default  {
             cursor: default;
             position: relative;
             //animation: grow 450ms ease;
-            transition: height 450ms ease;
+            transition: height 450ms ease-out;
             z-index: 9;
             .main-content {            
                 padding: 10%;
