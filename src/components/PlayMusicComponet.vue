@@ -129,46 +129,19 @@ export default  {
             this.expanded = true
             this.$emit('expand2', this.expanded) 
             setTimeout(()=> this.activeIdPreview = 0, 1000)
-            console.log(this.expanded)
         },
         close () {
             document.querySelector('.view2').classList.remove('expanded2')
             this.expanded = false
             this.$emit('expand2', this.expanded)
-            console.log(this.expanded)
         },
-        next (direction) {
-            if(this.activeId == 2 || this.activeId == 4) {
-                document.querySelector(".range-input2 input").value ="95"
-                this.start = 95
-                this.stop = 130
-            } else if (this.activeId == 1 || this.activeId == 3){
-                document.querySelector(".range-input2 input").value ="0"
-                this.start = 0
-                this.stop = 225
-            } 
+        next (direction) { 
             if (direction == 'right') {
-                if(this.activeId >=4 ) {
-                    setTimeout(() => {
-                        this.activeId = 4 
-                        this.activeIdPreview = 2
-                    }, 20)
-                } else {
-                    ++this.activeId
-                    ++this.activeIdPreview
-                    console.log(this.activeId)
-                }
-            } else if (direction == 'left') {                
-                if(this.activeId == 2) {
-                    setTimeout(() => {
-                        this.activeId = 2 
-                        this.activeIdPreview = 0
-                    }, 20)
-                } else if (this.activeId >2<4) {
-                    --this.activeId
-                    --this.activeIdPreview
-                    console.log(this.activeId)
-                }
+                this.activeId = 3
+                this.activeIdPreview = 1
+            } else if (direction == 'left') {                    
+                this.activeId = 2
+                this.activeIdPreview = 0
             }
             
         }

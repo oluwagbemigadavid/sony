@@ -145,13 +145,11 @@ export default {
             document.querySelector('.view').classList.add('expanded')
             this.expanded = true
             this.$emit('expand', this.expanded)
-            console.log(this.expanded)
         },
         close () {
             document.querySelector('.view').classList.remove('expanded')
             this.expanded = false
             this.$emit('expand', this.expanded)
-            console.log(this.expanded)
         }
     }
 }
